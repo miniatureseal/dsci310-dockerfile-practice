@@ -24,8 +24,4 @@ jobs:
         password: ${{ secrets.DOCKER_TOKEN }}
 
     - name: Build and push Docker images
-      uses: docker/build-push-action@v4
-      with:
-        context: .
-        push: true
-        tags: miniatureseal/dockerfile-practice
+      run: docker push miniatureseal/dockerfile-practice:latest miniatureseal/dockerfile-practice:latest
