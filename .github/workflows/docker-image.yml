@@ -24,4 +24,4 @@ jobs:
         password: ${{ secrets.DOCKER_TOKEN }}
 
     - name: Build and push Docker images
-      run: docker push miniatureseal/dockerfile-practice:latest miniatureseal/dockerfile-practice:latest
+      run: docker push miniatureseal/dockerfile-practice:latest
