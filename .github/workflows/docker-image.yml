@@ -13,13 +13,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - uses: actions/checkout@v3
     - name: Get latest release from repo
       id: last_release
       uses: InsonusK/get-latest-release@v1.0.1
       with:
         view_top: 1
     
-    - uses: actions/checkout@v3
     - name: Build the Docker image
       run: docker build --file Dockerfile -t miniatureseal/dockerfile-practice:latest -t miniatureseal/dockerfile-practice:${{ steps.last_release.outputs.name }} .
       
@@ -30,4 +30,4 @@ jobs:
         password: ${{ secrets.DOCKER_TOKEN }}
 
     - name: Build and push Docker images
-      run: docker push miniatureseal/dockerfile-practice
+      run: docker push miniatureseal/dockerfile-practice --all-tags
