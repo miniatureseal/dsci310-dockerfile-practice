@@ -14,14 +14,14 @@ jobs:
 
     steps:
     - name: Get latest release from repo
-      id: releasetag
-      uses: pozetroninc/github-action-get-latest-release@master
+      id: last_release
+      uses: InsonusK/get-latest-release@v1.0.1
       with:
-        repository: ${{ github.repository }}
+        view_top: 1
     
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag miniatureseal/dockerfile-practice:latest --tag miniatureseal/dockerfile-practice:${{ steps.releasetag.outputs.release }}
+      run: docker build . --file Dockerfile --tag miniatureseal/dockerfile-practice:latest --tag miniatureseal/dockerfile-practice:${{ steps.last_release.outputs.name }}
       
     - name: Log in to Docker Hub
       uses: docker/login-action@v2
