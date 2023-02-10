@@ -13,9 +13,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Get latest release of repo
+    - id: releasetag
+      uses: pozetroninc/github-action-get-latest-release@master
+      with:
+        repository: ${{ github.repository }}
+    
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag miniatureseal/dockerfile-practice:latest
+      run: docker build . --file Dockerfile --tag miniatureseal/dockerfile-practice:latest --tag miniatureseal/dockerfile-practice:${{ steps.releasetag.outputs.release }}
       
     - name: Log in to Docker Hub
       uses: docker/login-action@v2
@@ -24,4 +30,4 @@ jobs:
         password: ${{ secrets.DOCKER_TOKEN }}
 
     - name: Build and push Docker images
-      run: docker push miniatureseal/dockerfile-practice:latest
+      run: docker push miniatureseal/dockerfile-practice
