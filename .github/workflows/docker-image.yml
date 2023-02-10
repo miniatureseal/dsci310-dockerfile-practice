@@ -21,7 +21,7 @@ jobs:
     
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag miniatureseal/dockerfile-practice:latest --tag miniatureseal/dockerfile-practice:${{ steps.last_release.outputs.name }}
+      run: docker build --file Dockerfile -t miniatureseal/dockerfile-practice:latest -t miniatureseal/dockerfile-practice:${{ steps.last_release.outputs.name }} .
       
     - name: Log in to Docker Hub
       uses: docker/login-action@v2
