@@ -13,7 +13,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - id: releasetag
+    - name: Get latest release from repo
+      id: releasetag
       uses: pozetroninc/github-action-get-latest-release@master
       with:
         repository: ${{ github.repository }}
